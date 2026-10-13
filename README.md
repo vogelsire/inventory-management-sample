@@ -32,3 +32,11 @@ Open http://127.0.0.1:8000/
 | Shopper | shopper | ShopperDemo-123 |
 
 Demo credentials are for local evaluation only.
+
+## Table of Contents
+
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Quick Start](#quick-start)
+- [Demo Accounts](#demo-accounts)
+- [Architecture & Technical Design](ARCHITECTURE.md)
