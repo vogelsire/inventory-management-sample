@@ -1,0 +1,26 @@
+
+{% extends "inventory/base.html" %}
+
+{% block title %}Delete Product{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width:600px; margin:auto;">
+    <h1>Delete Product?</h1>
+
+    <p>
+        Are you sure you want to delete
+        <strong>{{ product.name }}</strong>
+        ({{ product.sku }})?
+    </p>
+
+    <p class="muted">
+        Products with existing order history cannot be deleted.
+    </p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confirm Delete</button>
+        <a href="{% url 'inventory-dashboard' %}">Cancel</a>
+    </form>
+</div>
+{% endblock %}

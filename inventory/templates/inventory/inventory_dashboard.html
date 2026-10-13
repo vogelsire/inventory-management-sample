@@ -1,0 +1,75 @@
+
+{% extends "inventory/base.html" %}
+
+{% block title %}Inventory Dashboard{% endblock %}
+
+{% block content %}
+<h1>Inventory Dashboard</h1>
+<p class="muted">Manage your products and stock levels.</p>
+
+<div class="grid">
+    <div class="card">
+        <p class="muted">Total Products</p>
+        <h2>{{ total_products }}</h2>
+    </div>
+    <div class="card">
+        <p class="muted">Active Products</p>
+        <h2>{{ active_products }}</h2>
+    </div>
+    <div class="card">
+        <p class="muted">Low Stock (5 or fewer)</p>
+        <h2>{{ low_stock_products }}</h2>
+    </div>
+</div>
+
+<p>
+    <a class="button" href="{% url 'product-create' %}">
+        + Add Product
+    </a>
+</p>
+
+<div class="card" style="overflow-x:auto;">
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>SKU</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.sku }}</td>
+                    <td>${{ product.price }}</td>
+                    <td>{{ product.stock }}</td>
+                    <td>
+                        {% if product.is_active %}
+                            Active
+                        {% else %}
+                            Inactive
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{% url 'product-edit' product.id %}">
+                            Edit
+                        </a>
+                        |
+                        <a href="{% url 'product-delete' product.id %}">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="6">No products found.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

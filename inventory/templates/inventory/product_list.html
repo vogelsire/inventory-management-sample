@@ -1,0 +1,61 @@
+
+{% extends "inventory/base.html" %}
+
+{% block title %}Shop | Inventory Store{% endblock %}
+
+{% block content %}
+<h1>Discover Products</h1>
+<p class="muted">Browse available products and shop with confidence.</p>
+
+<form method="get" class="search">
+    <input
+        type="search"
+        name="q"
+        placeholder="Search products..."
+        value="{{ query }}"
+    >
+    <button type="submit">Search</button>
+    {% if query %}
+        <a class="button" href="{% url 'store' %}">Clear</a>
+    {% endif %}
+</form>
+
+<div class="grid">
+    {% for product in products %}
+        <article class="card">
+            <h2>{{ product.name }}</h2>
+            <p class="muted">SKU: {{ product.sku }}</p>
+            <p>{{ product.description|default:"No description available." }}</p>
+            <div class="price">${{ product.price }}</div>
+
+            {% if product.stock > 0 %}
+                <p class="muted">{{ product.stock }} in stock</p>
+                {% if user.is_authenticated %}
+                    <form method="post" action="{% url 'buy-product' product.id %}">
+                        {% csrf_token %}
+                        <label>
+                            Quantity
+                            <input
+                                type="number"
+                                name="quantity"
+                                min="1"
+                                max="{{ product.stock }}"
+                                value="1"
+                                required
+                            >
+                        </label>
+                        <p><button type="submit">Buy Now</button></p>
+                    </form>
+                {% else %}
+                    <a class="button" href="{% url 'login' %}">Login to Buy</a>
+                {% endif %}
+            {% else %}
+                <p class="muted">Out of stock</p>
+                <button disabled>Unavailable</button>
+            {% endif %}
+        </article>
+    {% empty %}
+        <p>No products found. Try another search.</p>
+    {% endfor %}
+</div>
+{% endblock %}
