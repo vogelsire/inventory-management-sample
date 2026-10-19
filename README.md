@@ -16,6 +16,7 @@ pip install -r requirements.txt
 ### 4. Initialize the database
 
 python manage.py migrate
+
 python manage.py seed_demo_data
 
 ### 5. Start the application
