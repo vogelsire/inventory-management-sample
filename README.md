@@ -7,21 +7,21 @@ cd inventory-management-sample
 
 ### 2. Create and activate a virtual environment
 
-python -m venv .venv
+python3 -m venv .venv
 
 ### 3. Install dependencies
 
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 
 ### 4. Initialize the database
 
-python manage.py migrate
+python3 manage.py migrate
 
-python manage.py seed_demo_data
+python3 manage.py seed_demo_data
 
 ### 5. Start the application
 
-python manage.py runserver
+python3 manage.py runserver
 
 Open http://127.0.0.1:8000/
 

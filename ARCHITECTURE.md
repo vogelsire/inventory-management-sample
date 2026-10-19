@@ -194,13 +194,13 @@ Prerequisites: Python and pip.
 git clone https://github.com/vogelsire/inventory-management-sample.git
 cd inventory-management-sample
 
-python -m venv .venv
+python3 -m venv .venv
 source .venv/bin/activate
 
-pip install -r requirements.txt
-python manage.py migrate
-python manage.py seed_demo_data
-python manage.py runserver
+pip3 install -r requirements.txt
+python3 manage.py migrate
+python3 manage.py seed_demo_data
+python3 manage.py runserver
 ```
 
 Open `http://127.0.0.1:8000/`.
